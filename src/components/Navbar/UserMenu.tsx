@@ -3,10 +3,18 @@ import { useCallback, useState } from 'react'
 import { HiOutlineMenu } from 'react-icons/hi'
 import Avatar from '../Avatar'
 import MenuItem from './MenuItem'
+import useLoginModal from '@/hooks/useLoginModal'
 import useRegisterModal from '@/hooks/useRegisterModal'
+import { User } from '@prisma/client'
+import { signOut } from 'next-auth/react'
 
-export default function UserMenu() {
+interface UserMenuProps {
+  currentUser?: User | null
+}
+export default function UserMenu({ currentUser }: UserMenuProps) {
+  const loginModal = useLoginModal()
   const registerModal = useRegisterModal()
+
   const [isOpen, setIsOpen] = useState(false)
 
   const toggleOpen = useCallback(() => {
@@ -34,8 +42,18 @@ export default function UserMenu() {
       {isOpen && (
         <div className='absolute top-12 w-[40vw] overflow-hidden rounded-xl bg-white text-sm shadow-md ring-0 md:w-3/4'>
           <div className='flex cursor-pointer flex-col'>
-            <MenuItem label='Login' onClick={() => {}} />
-            <MenuItem label='Register' onClick={registerModal.onOpen} />
+            {currentUser ? (
+              <>
+                <MenuItem label='Other' onClick={() => {}} />
+                <hr />
+                <MenuItem label='Logout' onClick={() => signOut()} />
+              </>
+            ) : (
+              <>
+                <MenuItem label='Login' onClick={loginModal.onOpen} />
+                <MenuItem label='Register' onClick={registerModal.onOpen} />
+              </>
+            )}
           </div>
         </div>
       )}
