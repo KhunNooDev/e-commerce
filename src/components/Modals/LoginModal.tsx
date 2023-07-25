@@ -65,8 +65,8 @@ export default function LoginModal() {
   const footerContent = (
     <div className='mt-3 flex flex-col gap-4'>
       <hr />
-      <Button label='Continue with Google' icon={FcGoogle} onClick={() => {}} outline />
-      <Button label='Continue with Github' icon={AiFillGithub} onClick={() => {}} outline />
+      {/* <Button label='Continue with Google' icon={FcGoogle} onClick={() => signIn('google')} outline /> */}
+      <Button label='Continue with Github' icon={AiFillGithub} onClick={() => signIn('github')} outline />
       <div className='mt-4 text-center font-light text-neutral-500'>
         <div className='flex flex-row items-center justify-center gap-2'>
           <div>Already have an account?</div>
