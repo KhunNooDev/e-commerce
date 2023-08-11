@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { AiFillGithub } from 'react-icons/ai'
 import { FcGoogle } from 'react-icons/fc'
@@ -46,15 +46,20 @@ export default function LoginModal() {
     })
   }
 
+  const onToggle = useCallback(() => {
+    loginModal.onClose()
+    registerModal.onOpen()
+  }, [loginModal, registerModal])
+
   const bodyContent = (
     <div className='flex flex-col gap-4'>
       <Heading title='Welcome back' subtitle='Login to your account!' center />
-      <Input id='email' label='Email' disable={isLoading} register={register} errors={errors} required />
+      <Input id='email' label='Email' disabled={isLoading} register={register} errors={errors} required />
       <Input
         id='password'
         label='Password'
         type='password'
-        disable={isLoading}
+        disabled={isLoading}
         register={register}
         errors={errors}
         required
@@ -69,10 +74,10 @@ export default function LoginModal() {
       <Button label='Continue with Github' icon={AiFillGithub} onClick={() => signIn('github')} outline />
       <div className='mt-4 text-center font-light text-neutral-500'>
         <div className='flex flex-row items-center justify-center gap-2'>
-          <div>Already have an account?</div>
-          <div className='cursor-pointer text-neutral-500 hover:underline' onClick={loginModal.onClose}>
-            Log in
-          </div>
+          <p>Don't have an account?</p>
+          <span className='cursor-pointer text-neutral-800 hover:underline' onClick={onToggle}>
+            Create an account
+          </span>
         </div>
       </div>
     </div>

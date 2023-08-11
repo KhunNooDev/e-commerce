@@ -1,27 +1,19 @@
-import React from 'react'
+'use client'
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 import { BiDollar } from 'react-icons/bi'
 
-interface InputProps {
+interface IInput {
   id: string
   label: string
   type?: string
-  disable?: boolean
+  disabled?: boolean
   formatPrice?: boolean
   required?: boolean
   register: UseFormRegister<FieldValues>
   errors: FieldErrors
 }
-export default function Input({
-  id,
-  label,
-  type = 'text',
-  disable,
-  formatPrice,
-  required,
-  register,
-  errors,
-}: InputProps) {
+
+export default function Input({ id, label, type = 'text', disabled, formatPrice, required, register, errors }: IInput) {
   return (
     <div className='relative w-full'>
       {formatPrice && <BiDollar size={24} className='absolute left-2 top-5 text-neutral-700' />}
@@ -33,7 +25,7 @@ export default function Input({
         className={`peer w-full rounded-md border-2 bg-white p-4 pt-6 font-light outline-none transition disabled:cursor-not-allowed disabled:opacity-70
         ${formatPrice ? 'pl-9' : 'pl-4'}
         ${errors[id] ? 'border-rose-500 focus:border-rose-500' : 'border-neutral-300 focus:border-black'}`}
-        disabled={disable}
+        disabled={disabled}
       />
       <label
         className={`text-md absolute top-5 z-10 origin-[0] -translate-y-3 transform duration-150
