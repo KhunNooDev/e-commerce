@@ -1,14 +1,1 @@
-{
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
-  "editor.detectIndentation": false,
-  "editor.formatOnSave": true,
-  "editor.formatOnPaste": false,
-  "[prisma]": {
-    "editor.defaultFormatter": "Prisma.prisma"
-  }
-  // "prettier.useEditorConfig": true,
-  // "prettier.useTabs": false,
-  // "prettier.configPath": ".prettierrc.json"
-}
+{}
